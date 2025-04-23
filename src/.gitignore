@@ -1,0 +1,17 @@
+# Build output
+target/
+build/
+out/
+bin/
+
+# IDE specific files
+.idea/
+.vscode
+*.iml
+.classpath
+.project
+.settings/
+
+# Dependency directories
+**/node_modules/
+**/.gradle/
