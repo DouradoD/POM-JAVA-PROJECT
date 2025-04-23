@@ -1,7 +1,8 @@
-package com.example.setup;
+package com.example.stepdefinitions;
 
 import org.openqa.selenium.WebDriver;
 import com.example.PageManager;
+import com.example.setup.DriverManager;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;

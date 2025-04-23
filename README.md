@@ -1,4 +1,4 @@
-# Project Title: POM Java Project
+# POM Java Project
 
 ## Description
 This project implements the Page Object Model (POM) design pattern for a Java-based application. It is structured to facilitate easy maintenance and scalability of test automation scripts.
@@ -25,10 +25,10 @@ pom-java-project
 │       │   │       │   └── TestRunner.java
 │       │   │       └── setup
 │       │   │       |   └── DriverManager.java
-│       │   │       |   └── Hooks.java
 │       │   │       |   └── TestContext.java
 │       │   │       └── stepdefinitions
-│       │   │       |    └── HomeSteps.java
+│       │   │       |   └── Hooks.java
+│       │   │       |   └── HomeSteps.java
 │       │   │       └── testdata
 │       │   │           └── TestData.java
 │       └── resources
