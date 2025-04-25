@@ -4,6 +4,16 @@ build/
 out/
 bin/
 
+#temporary folders
+temp/
+tmp/
+# Logs
+logs/
+*.log
+# OS generated files
+.DS_Store
+Thumbs.db
+
 # IDE specific files
 .idea/
 .vscode

@@ -15,7 +15,7 @@ public class Hooks {
     @Before
     public void setup(Scenario scenario) {
         System.out.println("Starting scenario: " + scenario.getName());
-        WebDriver driver = DriverManager.getDriver(); // Initialize driver for this thread
+        driver = DriverManager.getDriver(); // Initialize driver for this thread
         driver.manage().window().maximize();
         pages = new PageManager(driver);
     }
