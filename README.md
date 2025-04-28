@@ -1,7 +1,9 @@
 # POM Java Project
 
 ## Description
-This project implements the Page Object Model (POM) design pattern for a Java-based application. It is structured to facilitate easy maintenance and scalability of test automation scripts.
+This project implements the Page Object Model (POM) design pattern for a Java-based automation testing framework. It is designed to facilitate easy maintenance, scalability, and reusability of test automation scripts. The project uses Selenium, Cucumber, and JUnit for test execution and reporting.
+
+---
 
 ## Folder Structure
 ```
@@ -24,102 +26,122 @@ pom-java-project
 │       │   │       ├── runner
 │       │   │       │   └── TestRunner.java
 │       │   │       └── setup
-│       │   │       |   └── DriverManager.java
-│       │   │       |   └── TestContext.java
+│       │   │       │   └── DriverManager.java
+│       │   │       │   └── TestContext.java
 │       │   │       └── stepdefinitions
-│       │   │       |   └── Hooks.java
-│       │   │       |   └── HomeSteps.java
+│       │   │       │   └── Hooks.java
+│       │   │       │   └── HomeSteps.java
 │       │   │       └── testdata
 │       │   │           └── TestData.java
 │       └── resources
 │           └── features
-|           |    └── home.feature
+│               └── home.feature
 │           └── junit-platform.properties
 │           └── test-config.properties
 ├── pom.xml
+├── Dockerfile
+├── docker-compose.yml
 └── README.md
 ```
 
+---
+
 ## Setup Instructions
-1. **Clone the repository**: 
-   ```
+
+### Prerequisites
+- Install [Java 21](https://openjdk.org/projects/jdk/21/).
+- Install [Maven](https://maven.apache.org/).
+- Install [Docker](https://www.docker.com/).
+
+### Steps
+1. **Clone the repository**:
+   ```bash
    git clone <repository-url>
    ```
+
 2. **Navigate to the project directory**:
-   ```
+   ```bash
    cd pom-java-project
    ```
+
 3. **Build the project**:
-   ```
+   ```bash
    mvn clean install
    ```
+
 4. **Run the tests**:
-   ```
+   ```bash
    mvn test
    ```
 
-## Running using Docker
-## Running on Docker
-1. Install the docker
-2. Access the pytest-rest-api, in the same level of Dockerfile
-   3. Run the docker command to create an image:
-   ```
-      docker build -t <image_name> .
+---
 
-      ex: docker build -t pom-java-p .
+## Running Using Docker
+
+### Steps
+1. **Build the Docker image**:
+   ```bash
+   docker build -t pom-java-project .
    ```
-   Command to check the images: docker images
-    ```
-        docker images
+
+2. **Run the container**:
+   ```bash
+   docker run --rm pom-java-project
    ```
-   4. Run the container:
-   ```
-      docker run --rm <image_name>
-      
-      ex: docker run --rm pytest-rest
-   ```
-   Command to check the containers running
-   ```
+
+3. **Check running containers**:
+   ```bash
    docker ps
    ```
-3. (Optional) Mount a volume to access the HTML report on your host machine:
 
-   1. Create a package in the root with the name reports;
-   2. Replace the $(pwd) or pwd for your project pash:
-      2. Ex: pwd -> C:/Users/YOUR_USER/project/pytest-rest-api
-```bash
-     # 1. Stop everything
-docker compose down
+4. **Stop all containers**:
+   ```bash
+   docker compose down
+   ```
 
-# 2. Rebuild with fixed Dockerfile
-docker compose build --no-cache 
-or 
-docker compose build
+---
 
+## Running with Selenium Grid Using Docker Compose
 
-# 3. Start grid services
-docker compose up -d selenium-hub session_browser_one session_browser_two
+### Steps
+1. **Build the Docker image**:
+   ```bash
+   docker compose build --no-cache
+   ```
 
-# 4. Verify grid is ready
-docker compose run --rm project-img curl -v http://selenium-hub:4444/wd/hub/status
+2. **Start Selenium Grid services**:
+   ```bash
+   docker compose up -d selenium-hub session_browser_one session_browser_two
+   ```
 
-# 5. Run tests (finally!)
-docker compose -f docker-compose.yml run -v --rm project-img mvn clean test -DexecutionMode=grid -DgridUrl=http://selenium-hub:4444/wd/hub -X
-```
-- -v <YOUR_PROJECT_PATH>/reports:/usr/src/app/reports: Mounts the reports directory on your host to /usr/src/app/reports in the container.
+3. **Verify Selenium Grid is ready**:
+   ```bash
+   docker compose run --rm project-img curl -v http://selenium-hub:4444/wd/hub/status
+   ```
 
-- The HTML report will be saved in the reports directory on your host.
+4. **Run the tests**:
+   ```bash
+   docker compose run --rm project-img mvn clean test -DexecutionMode=grid -DgridUrl=http://selenium-hub:4444/wd/hub
+   ```
 
-The .html will be stored inside the reports folder
+5. **Access the test reports**:
+   - The test reports will be saved in the `target/reports` directory inside the container.
+   - To access them on your host machine, mount the `reports` directory as a volume:
+     ```yaml
+     volumes:
+       - ./target/reports:/app/target/reports
+     ```
+
+---
+
 ## Usage
-- The project uses Maven for dependency management and build automation.
-- Test cases are located in the `src/test/java/com/example/tests` directory.
-- Page objects are defined in the `src/main/java/com/example/pages` directory.
+- **Test Cases**: Located in `src/test/java/com/example/stepdefinitions`.
+- **Feature Files**: Located in `src/test/resources/features`.
+- **Page Objects**: Located in `src/main/java/com/example/pages`.
+
+---
 
 ## Contributing
 Contributions are welcome! Please create a pull request or open an issue for any enhancements or bug fixes.
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-WIP
+---
