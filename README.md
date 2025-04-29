@@ -72,34 +72,34 @@ pom-java-project
 4. **Run the tests**:
    ```bash
    mvn test
+   Or
+   mvn clean test -DexecutionMode=local
    ```
 
 ---
 
-## Running Using Docker
+## Running Local using Selenium Grid on localhost
 
 ### Steps
 1. **Build the Docker image**:
    ```bash
-   docker build -t pom-java-project .
+   docker compose build --no-cache
    ```
 
-2. **Run the container**:
+2. **Start Selenium Grid services**:
    ```bash
-   docker run --rm pom-java-project
+   docker compose up -d selenium-hub session_browser_one session_browser_two
    ```
 
-3. **Check running containers**:
+3. **Verify Selenium Grid is ready**:
    ```bash
-   docker ps
+   docker compose run --rm project-img curl -v http://selenium-hub:4444/wd/hub/status
    ```
 
-4. **Stop all containers**:
+4. **Run the tests**:
    ```bash
-   docker compose down
-   ```
+   mvn clean test -DexecutionMode=grid -DgridUrl=http://localhost:4444/wd/hub
 
----
 
 ## Running with Selenium Grid Using Docker Compose
 
@@ -125,11 +125,11 @@ pom-java-project
    ```
 
 5. **Access the test reports**:
-   - The test reports will be saved in the `target/reports` directory inside the container.
+   - The test reports will be saved in the `tmp/reports` directory inside the container.
    - To access them on your host machine, mount the `reports` directory as a volume:
      ```yaml
      volumes:
-       - ./target/reports:/app/target/reports
+       - ./tmp/reports:/app/target/reports
      ```
 
 ---

@@ -21,7 +21,6 @@
             <artifactId>selenium-java</artifactId>
             <version>4.16.1</version>
         </dependency>
-        <!-- Cucumber -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -33,7 +32,6 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -46,8 +44,6 @@
             <version>7.14.0</version>
             <scope>test</scope>
         </dependency>
-        
-        <!-- Surefire Plugin Configuration -->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite</artifactId>
@@ -63,7 +59,7 @@
             <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>6.0.0</version> <!-- Replace with the latest version if needed -->
+            <version>6.0.0</version>
         </dependency>
     </dependencies>
 
@@ -74,14 +70,13 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
-                    <redirectTestOutputToFile>false</redirectTestOutputToFile>
+                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
                     <systemPropertyVariables>
-                    <executionMode>grid</executionMode>
-                    <gridUrl>http://selenium-hub:4444/wd/hub</gridUrl>
+                        <executionMode>local</executionMode>
+                        <gridUrl>http://selenium-hub:4444/wd/hub</gridUrl>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
-            <!-- Existing compiler plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
