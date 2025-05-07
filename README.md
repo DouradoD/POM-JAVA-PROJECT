@@ -53,6 +53,17 @@ pom-java-project
 - Install [Maven](https://maven.apache.org/).
 - Install [Docker](https://www.docker.com/).
 
+### Maven actions - not required
+
+- mvn clean - Deletes the target directory (removes compiled files and artifacts).
+- mvn compile - Compiles source code (src/main/java).
+- mvn test - Compiles and runs unit tests (src/test/java).
+- mvn package - Compiles, tests, and packages the project (e.g., JAR/WAR in target/).
+- mvn install - Installs the built artifact into the local Maven repository.
+- mvn deploy -	Deploys the artifact to a remote repository (requires distributionManagement in pom.xml).
+- mvn verify -	Runs integration tests and checks if the project is valid.
+- mvn dependency:tree -	Displays the dependency tree (useful for conflict resolution).
+
 ### Steps
 1. **Clone the repository**:
    ```bash

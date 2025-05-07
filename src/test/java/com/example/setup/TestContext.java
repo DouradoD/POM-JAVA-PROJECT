@@ -15,7 +15,7 @@ public class TestContext {
     }
     
     private void initializePages() {
-        pages = new com.example.PageManager(driver);
+        pages = new PageManager(driver);
 
     }
     
